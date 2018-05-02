@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper   namespace="cn.trace.dao.brand.BrandMapper"  >
+	<insert id="addBrand"  parameterType="brand"  >
+			insert into brand(brandname,branddes,brandpicture,pronumber,brandnum,comname) values
+			(#{brandname},#{branddes},#{brandpicture},#{pronumber},#{brandnum},#{comname})
+	</insert>
+	
+	<insert id="addBatch"  parameterType="batch"  >
+			insert into batch(productnum,producternum,batchnumber) values
+			(#{productnum},#{producternum},#{batchnumber})
+	</insert>
+	
+	   
+	<delete id="delBrand"  parameterType="brand">
+		 delete from brand
+		 <trim prefix="where" prefixOverrides="and|or">
+		 	<if test="pronumber!=null">
+		 	  and pronumber=#{pronumber}
+		 	</if>
+		 	<if test="brandnum!=null">
+		 	  and brandnum=#{brandnum}
+		 	</if>
+		 </trim>
+	</delete>
+	<select  id="getBrand"  parameterType="brand"  resultType="brand">
+		 select *  from  brand  
+		 <trim prefix="where" prefixOverrides="and|or">
+		 	<if test="pronumber!=null">
+		 	  and pronumber=#{pronumber}
+		 	</if>
+		 	<if test="brandnum!=null">
+		 	  and brandnum=#{brandnum}
+		 	</if>
+		 </trim>
+	</select>
+	<select  id="getBatch"  parameterType="batch"  resultType="batch">
+		 select *  from batch  
+		 <trim prefix="where" prefixOverrides="and|or">
+		 	<if test="batchnumber!=null">
+		 	  and batchnumber=#{batchnumber}
+		 	</if>
+		 	<if test="producternum!=null">
+		 	  and producternum=#{producternum}
+		 	</if>
+		 </trim>
+	</select>
+	
+	
+	
+	<select id="getBrandList"  parameterType="brand"  resultType="brand">
+	     select * from brand where pronumber =#{pronumber}
+	</select>
+	
+	<select id="getBatchList" parameterType="batch" resultType="batch">
+	     select * from batch where producternum = #{producternum}
+	</select>
+	
+	<update id="updateBrand"  parameterType="brand">
+
+	    update brand
+		<set >  
+	      <if test=" brandname != null" >  
+	         brandname = #{ brandname},  
+	      </if>  
+	      <if test="branddes!= null" >  
+	         branddes = #{branddes},  
+	      </if>  
+	      <if test="brandpicture!= null" > 
+	         brandpicture = #{brandpicture},  
+	      </if>  
+	      <if test="pronumber!= null" >  
+	        pronumber = #{pronumber},  
+	      </if>  
+	      <if test="brandnum != null" >  
+	        brandnum = #{brandnum},  
+	      </if>  
+	      <if  test="comname!=null">
+	          comname = #{comname}
+	      </if>
+	    </set>  
+	        where brandnum= #{brandnum} 
+	</update>
+	
+</mapper>
+

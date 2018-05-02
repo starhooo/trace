@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+           http://www.springframework.org/schema/mvc
+           http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<mvc:resources mapping="/statics/**" location="/statics/" />
+	<mvc:annotation-driven/>
+	
+	<!-- 完成请求和注解POJO的映射 -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+	<!-- 装配controller -->
+	<context:component-scan base-package="cn.trace" >
+    	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>  
+    </context:component-scan> 
+	<!-- 对转向页面的路径解析。prefix：前缀， suffix：后缀 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
+		p:prefix="/WEB-INF/pages/" p:suffix=".jsp" />
+
+	<!-- 支持上传文件 -->  
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	
+	<!--  <mvc:interceptors>
+	  <mvc:interceptor>
+	    <mvc:mapping path="/backend/**" />
+	    <mvc:mapping path="/informanage/**" />
+	    <mvc:mapping path="/member/**" />
+	    <mvc:mapping path="/message/**" />
+	    <bean class="cn.ubangdi.interceptor.SysInterceptor">
+	    </bean>
+	  </mvc:interceptor>
+	</mvc:interceptors>-->
+	
+	
+</beans> 

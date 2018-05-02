@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper   namespace="cn.trace.dao.oparea.OpareaMapper"  >
+	<insert id=" addOparea"  parameterType="oparea"  >
+			insert into oparea(areaname,pronumber,areanum,isusing) values
+			(#{areaname},#{pronumber},#{areanum},,#{isusing})
+	</insert>
+	   
+	   
+	<delete id="delOparea"  parameterType="oparea">
+		 delete from oparea
+		 <trim prefix="where" prefixOverrides="and|or">
+		 	<if test="pronumber!=null">
+		 	  and pronumber=#{pronumber}
+		 	</if>
+		 	<if test="areanum!=null">
+		 	  and areanum=#{areanum}
+		 	</if>
+		 </trim>
+	</delete>
+	<select  id="getOparea"  parameterType="oparea"  resultType="oparea">
+		 select *  from oparea where  areanum=#{areanum}
+	</select>
+	
+	<select id="getOpareaList"  parameterType="oparea"  resultType="oparea">
+	     select * from oparea where pronumber=#{pronumber}
+	</select>
+	
+	<update id="updateOparea"  parameterType="oparea">
+	    update oparea
+		<set >  
+	      <if test=" areaname != null" >  
+	         areaname = #{ areaname},  
+	      </if>  
+	      <if test="pronumber != null" >  
+	         pronumber = #{pronumber},  
+	      </if>  
+	      <if test="areanum!= null" > 
+	         areanum = #{areanum},  
+	      </if>  
+	      <if test="isusing != null" >  
+	        isusing = #{isusing},  
+	      </if>  
+	    </set>  
+	        where areanum= #{areanum} 
+	</update>
+	
+
+</mapper>
+

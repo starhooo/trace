@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper   namespace="cn.trace.dao.optype.OptypeMapper"  >
+	<insert id="addOptype"  parameterType="optype"  >
+			insert into optype(opname,pronumber) values (#{opname},#{pronumber})
+	</insert>
+	
+	   
+	<delete id="delOptype"  parameterType="optype">
+		 delete from optype
+		 <trim prefix="where" prefixOverrides="and|or">
+		 	<if test="opname!=null">
+		 	  and opname=#{opname}
+		 	</if>
+		 	<if test="oprationnum!=null">
+		 	  and oprationnum=#{oprationnum}
+		 	</if>
+		 </trim>
+	</delete>
+	
+	<select id="getOptypeList"   resultType="optype">
+	     select * from optype
+	</select>
+	
+	
+</mapper>
+

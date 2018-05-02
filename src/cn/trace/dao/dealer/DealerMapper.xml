@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper   namespace="cn.trace.dao.dealer.DealerMapper"  >
+	<insert id="addDealer"  parameterType="dealer"  >
+			insert into dealer(dealername,dealeraddress,phone,producternum) values
+			(#{dealername},#{dealeraddress},#{phone},#{producternum})
+	</insert>
+
+	   
+	<delete id="delDealer"  parameterType="dealer">
+		 delete from dealer
+		 <trim prefix="where" prefixOverrides="and|or">
+		 	<if test="dealernum!=null">
+		 	  and dealernum=#{dealernum}
+		 	</if>
+		 	<if test="producternum!=null">
+		 	  and producternum=#{producternum}
+		 	</if>
+		 </trim>
+	</delete>
+	<select  id="getDealer"  parameterType="dealer"  resultType="dealer">
+		 select *  from  dealer
+		 <trim prefix="where" prefixOverrides="and|or">
+		 	<if test="dealernum!=null">
+		 	  and pronumber=#{pronumber}
+		 	</if>
+		 	<if test="phone!=null">
+		 	  and phone=#{phone}
+		 	</if>
+		 </trim>
+		 </select>
+	
+	<select id="getDealerList"  parameterType="dealer"  resultType="dealer">
+	     select * from dealer where producternum =#{producternum}
+	</select>
+	
+	<update id="updateDealer"  parameterType="dealer">
+
+	    update dealer
+		<set >  
+	      <if test=" dealername != null" >  
+	         dealername = #{dealername},  
+	      </if>  
+	      <if test="dealeraddress!= null" >  
+	         dealeraddress = #{dealeraddress},  
+	      </if>  
+	      <if test="phone!= null" > 
+	         phone = #{phone},  
+	      </if>  
+	    </set>  
+	        where dealernum= #{dealernum} 
+	</update>
+	
+</mapper>
+
+		 

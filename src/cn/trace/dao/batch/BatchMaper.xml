@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper   namespace="cn.trace.dao.batch.BatchMapper"  >
+	<insert id="addBatch"  parameterType="batch"  >
+			insert into batch(productnum, producternum,batchnumber) values
+			(#{productnum},#{producternum},#{batchnumber})
+	</insert>
+	
+	   
+	<delete id="delBatch"  parameterType="batch">
+		 delete from batch  where batchnumber = #{batchnumber}
+	</delete>
+	
+
+	<select  id="getBatch"  parameterType="batch"  resultType="batch">
+		 select *  from  batch where  where batchnumber = #{batchnumber}
+	</select>
+	
+	
+	<select id="getBatchList" parameterType="batch" resultType="batch">
+	     select * from batch where producternum = #{producternum}
+	</select>
+	
+	<update id="updateBatch"  parameterType="batch" >
+	    update batch
+		<set >  
+	      <if test=" productnum != null" >  
+	         productnum = #{ productnum},  
+	      </if>  
+	      <if test="batchnumber!= null" >  
+	        batchnumber = #{batchnumber},  
+	      </if>  
+	    
+	    </set>  
+	        where  batchnumber= #{ batchnumber} 
+	</update>
+	
+</mapper>
+

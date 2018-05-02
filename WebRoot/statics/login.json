@@ -1,0 +1,31 @@
+http://localhost:8090/ubangdi/login
+
+登陆字段
+phone//用户名
+password//密码
+
+返回数据
+    //网络错误
+{
+    'data':null,
+    'errorInfo':'网络错误',
+    'success':false//代表网络错误
+}
+    //登陆成功
+{
+    'data':{
+        'state':1,//代表登陆成功
+        'name':'abcde',//用户名称
+    }
+    'errorInfo':null,
+    'success':true//网络畅通
+}
+    //登陆失败
+{
+    'data':{
+        'state':0,//代表登陆失败
+        'name':null,//用户名称
+    }
+    'errorInfo':'用户名或密码错误',
+    'success':true//网络畅通
+}
